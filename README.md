@@ -4,7 +4,8 @@
 
 1. Install Deno (follow the installation guide [here](https://deno.land/manual@v1.28.3/getting_started/installation))
 2. Open the workspace
-3. If you haven't already, install the `esbenp.prettier-vscode` vscode extension to enable formatting
+3. If you haven't already, Install the `denoland.vscode-deno` vscode extension
+4. If you haven't already, install the `esbenp.prettier-vscode` vscode extension to enable formatting
 
 ## Setup for Each Day
 
