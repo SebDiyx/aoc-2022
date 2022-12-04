@@ -1,11 +1,15 @@
 {
-	"folders": [
-		{
-			"path": ".",
-			"name": "🎄 Advent of Code 2022"
-		}
-	],
-	"settings": {
-		"deno.unstable": true
-	}
+    "folders": [
+        {
+            "path": ".",
+            "name": "🎄 Advent of Code 2022"
+        }
+    ],
+    "settings": {
+        "deno.unstable": true,
+        "editor.formatOnSave": true,
+        "[typescript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+    }
 }
