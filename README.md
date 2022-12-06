@@ -18,5 +18,5 @@
 2. Run:
 
     ```bash
-    deno run --allow-read <file-name>.ts
+    deno run --allow-read --watch <file-name>.ts
     ```
