@@ -43,10 +43,12 @@ const instructions = instructionsInput.split('\n').map((line) => {
 for (const instruction of instructions) {
     const [num, startCol, endCol] = instruction;
 
-    new Array(num).fill(null).forEach(() => {
-        const crate = cratesState[startCol - 1].pop();
-        if (crate) cratesState[endCol - 1].push(crate);
-    });
+    Array(num)
+        .fill(null)
+        .forEach(() => {
+            const crate = cratesState[startCol - 1].pop();
+            if (crate) cratesState[endCol - 1].push(crate);
+        });
 }
 
 const answer = cratesState.map((column) => column[column.length - 1]).join('');
