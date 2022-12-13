@@ -62,19 +62,26 @@ function getValidMoves(point: Point) {
 const visitedPoints = new Set<string>([JSON.stringify(start)]);
 let incompletePaths: Point[][] = [[start]];
 
+// Keep going until we've completed every path or we meet our goal
 while (incompletePaths.length > 0) {
+    // Keep track of our new list of paths (this will override our old one)
     const newIncompletePaths: Point[][] = [];
+
     for (const incompletePath of incompletePaths) {
+        // Get the last point in the current path and get all the valid moves from there
         const lastPoint = incompletePath[incompletePath.length - 1];
         const validMoves = getValidMoves(lastPoint);
 
         for (const move of validMoves) {
+            // Check if we've visited this point already, that means theres a faster route to that point
             if (visitedPoints.has(JSON.stringify(move))) continue;
 
             visitedPoints.add(JSON.stringify(move));
 
+            // Create a new copy of our path with our next move
             const newIncompletePath = [...incompletePath, move];
 
+            // Check if we've reach our goal, if not add our current path to the list of new incomplete paths
             if (move.x === goal.x && move.y === goal.y) {
                 console.log('Goal', newIncompletePath.length - 1);
                 Deno.exit();
@@ -84,5 +91,6 @@ while (incompletePaths.length > 0) {
         }
     }
 
+    // Override our old list of incompletePaths
     incompletePaths = newIncompletePaths;
 }
