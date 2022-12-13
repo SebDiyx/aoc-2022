@@ -9,15 +9,17 @@ function getElevation(elevationStr: string): number {
 }
 
 let start: Point = { x: 0, y: 0 };
+let goal: Point = { x: 0, y: 0 };
 
 const elevationMap = input.split('\n').map((line, y) =>
     line.split('').map((cell, x) => {
         if (cell === 'S') {
+            start = { x, y };
             return getElevation('a');
         }
 
         if (cell === 'E') {
-            start = { x, y };
+            goal = { x, y };
             return getElevation('z');
         }
 
@@ -28,31 +30,29 @@ const elevationMap = input.split('\n').map((line, y) =>
 function getValidMoves(point: Point) {
     const validMoves: Point[] = [];
 
-    // Note: since we're working backwards from the goal, we can now only go down one but up as many as we want
-
     const { x, y } = point;
     const currHeight = elevationMap[point.y][point.x];
 
     const leftPos = { x: x - 1, y };
-    if (leftPos.x >= 0 && elevationMap[y][leftPos.x] >= currHeight - 1) {
+    if (leftPos.x >= 0 && elevationMap[y][leftPos.x] <= currHeight + 1) {
         validMoves.push(leftPos);
     }
 
     // Check up
     const upPos = { x, y: y - 1 };
-    if (upPos.y >= 0 && elevationMap[upPos.y][x] >= currHeight - 1) {
+    if (upPos.y >= 0 && elevationMap[upPos.y][x] <= currHeight + 1) {
         validMoves.push(upPos);
     }
 
     // Check down
     const downPos = { x, y: y + 1 };
-    if (downPos.y < elevationMap.length && elevationMap[downPos.y][x] >= currHeight - 1) {
+    if (downPos.y < elevationMap.length && elevationMap[downPos.y][x] <= currHeight + 1) {
         validMoves.push(downPos);
     }
 
     // Check right
     const rightPos = { x: x + 1, y };
-    if (rightPos.x < elevationMap[y].length && elevationMap[y][rightPos.x] >= currHeight - 1) {
+    if (rightPos.x < elevationMap[y].length && elevationMap[y][rightPos.x] <= currHeight + 1) {
         validMoves.push(rightPos);
     }
 
@@ -75,8 +75,7 @@ while (incompletePaths.length > 0) {
 
             const newIncompletePath = [...incompletePath, move];
 
-            // Our goal is to find the first move with elevation 1
-            if (elevationMap[move.y][move.x] === 1) {
+            if (move.x === goal.x && move.y === goal.y) {
                 console.log('Goal', newIncompletePath.length - 1);
                 Deno.exit();
             } else {
