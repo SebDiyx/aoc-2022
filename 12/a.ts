@@ -42,49 +42,49 @@ function isPosAlreadyInPath(pos: Pos, path: Path) {
     return parents.some((path) => path.pos.x === pos.x && path.pos.y === pos.y);
 }
 
-let shortestPath = 999;
-function setShortestPath(pos: Pos, depth = 0) {
-    const { x, y } = pos;
+// let shortestPath = 999;
+// function setShortestPath(pos: Pos, depth = 0) {
+//     const { x, y } = pos;
 
-    console.log(x, y); // TODO: seb remove <------------
+//     console.log(x, y); // TODO: seb remove <------------
 
-    // We've reached our goal
-    if (x === goal.x && y === goal.y) {
-        if (depth < shortestPath) shortestPath = depth;
-        console.log('GOALLLLLL'); // TODO: seb remove <------------
-        return;
-    }
+//     // We've reached our goal
+//     if (x === goal.x && y === goal.y) {
+//         if (depth < shortestPath) shortestPath = depth;
+//         console.log('GOALLLLLL'); // TODO: seb remove <------------
+//         return;
+//     }
 
-    if (depth >= shortestPath) return;
+//     if (depth >= shortestPath) return;
 
-    const currHeight = elevationsMap[y][x];
+//     const currHeight = elevationsMap[y][x];
 
-    // Check up
-    const upPos = { x, y: y - 1 };
-    if (upPos.y >= 0 && elevationsMap[upPos.y][x] <= currHeight + 1) {
-        // const childPath: Path = { pos: upPos, parent: path, children: [] };
-        // path.children.push(childPath);
-        setShortestPath(upPos, depth + 1);
-    }
+//     // Check up
+//     const upPos = { x, y: y - 1 };
+//     if (upPos.y >= 0 && elevationsMap[upPos.y][x] <= currHeight + 1) {
+//         // const childPath: Path = { pos: upPos, parent: path, children: [] };
+//         // path.children.push(childPath);
+//         setShortestPath(upPos, depth + 1);
+//     }
 
-    // Check down
-    const downPos = { x, y: y + 1 };
-    if (downPos.y < elevationsMap.length && elevationsMap[downPos.y][x] <= currHeight + 1) {
-        setShortestPath(downPos, depth + 1);
-    }
+//     // Check down
+//     const downPos = { x, y: y + 1 };
+//     if (downPos.y < elevationsMap.length && elevationsMap[downPos.y][x] <= currHeight + 1) {
+//         setShortestPath(downPos, depth + 1);
+//     }
 
-    // Check left
-    const leftPos = { x: x - 1, y };
-    if (leftPos.x >= 0 && elevationsMap[y][leftPos.x] <= currHeight + 1) {
-        setShortestPath(leftPos, depth + 1);
-    }
+//     // Check left
+//     const leftPos = { x: x - 1, y };
+//     if (leftPos.x >= 0 && elevationsMap[y][leftPos.x] <= currHeight + 1) {
+//         setShortestPath(leftPos, depth + 1);
+//     }
 
-    // Check right
-    const rightPos = { x: x + 1, y };
-    if (rightPos.x < elevationsMap[y].length && elevationsMap[y][rightPos.x] <= currHeight + 1) {
-        setShortestPath(rightPos, depth + 1);
-    }
-}
+//     // Check right
+//     const rightPos = { x: x + 1, y };
+//     if (rightPos.x < elevationsMap[y].length && elevationsMap[y][rightPos.x] <= currHeight + 1) {
+//         setShortestPath(rightPos, depth + 1);
+//     }
+// }
 
 function populatePath(path: Path) {
     const { x, y } = path.pos;
